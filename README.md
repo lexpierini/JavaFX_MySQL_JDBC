@@ -7,7 +7,10 @@ Objectif général:
 
 Regarder le fichier Projet_JavaFX_MySQL_JDBC avec la description complete du projet.
 
-Cours: Programmation orientée objet avec Java.
-Prof. Dr. Nelio Alves.
+Cours: Programmation orientée objet avec Java
+
+Prof. Dr. Nelio Alves
+
 https://www.udemy.com/course/java-curso-completo/
+
 http://educandoweb.com.br
