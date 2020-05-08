@@ -31,7 +31,7 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemDepartementAction(){
-        System.out.println("onMenuItemDepartementAction");
+        loadView("/gui/ListeDepartement.fxml");
     }
 
     @FXML
@@ -44,7 +44,7 @@ public class MainViewController implements Initializable {
 
     }
 
-    // Affiche l'écran À propos.
+    // Affiche un nouvelle écran sur l'écran principal.
     private synchronized void loadView(String absoluteName) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
