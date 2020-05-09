@@ -16,6 +16,7 @@ import model.services.ServiceDepartement;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 public class MainViewController implements Initializable {
     @FXML
@@ -32,12 +33,15 @@ public class MainViewController implements Initializable {
 
     @FXML
     public void onMenuItemDepartementAction(){
-        loadView2("/gui/ListeDepartement.fxml");
+        loadView("/gui/ListeDepartement.fxml", (ListeDepartementController controller) -> {
+            controller.setServiceDepartement(new ServiceDepartement());
+            controller.updateTableView();
+        });
     }
 
     @FXML
     public void onMenuItemAProposAction(){
-        loadView("/gui/APropos.fxml");
+        loadView("/gui/APropos.fxml", x -> {});
     }
 
     @Override
@@ -46,7 +50,7 @@ public class MainViewController implements Initializable {
     }
 
     // Affiche un nouvelle écran sur l'écran principal.
-    private synchronized void loadView(String absoluteName) {
+    private synchronized <T> void loadView(String absoluteName, Consumer<T> initializingAction) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             VBox newVbox = loader.load();
@@ -60,28 +64,8 @@ public class MainViewController implements Initializable {
             mainVBox.getChildren().add(mainMenu);
             mainVBox.getChildren().addAll(newVbox.getChildren());
 
-        } catch (IOException e) {
-            Alerts.showAlert("IO Exception", "Erreur lors du chargement de la vue.", e.getMessage(), Alert.AlertType.ERROR);
-        }
-    }
-
-    private synchronized void loadView2(String absoluteName) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-            VBox newVbox = loader.load();
-
-            Scene mainScene = Main.getMainScene();
-            VBox mainVBox = (VBox) ((ScrollPane) mainScene.getRoot()).getContent(); //Prenez le premier élément de la vue.
-
-            // Remplace le MenuBar MainView par le MenuBar APropos.
-            Node mainMenu = mainVBox.getChildren().get(0);
-            mainVBox.getChildren().clear();
-            mainVBox.getChildren().add(mainMenu);
-            mainVBox.getChildren().addAll(newVbox.getChildren());
-
-            ListeDepartementController controller = loader.getController();
-            controller.setServiceDepartement(new ServiceDepartement());
-            controller.updateTableView();
+            T controller = loader.getController();
+            initializingAction.accept(controller);
 
         } catch (IOException e) {
             Alerts.showAlert("IO Exception", "Erreur lors du chargement de la vue.", e.getMessage(), Alert.AlertType.ERROR);
