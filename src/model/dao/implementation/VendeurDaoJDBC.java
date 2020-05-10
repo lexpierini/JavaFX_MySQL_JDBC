@@ -18,7 +18,7 @@ import model.entities.Vendeur;
 
 public class VendeurDaoJDBC implements VendeurDao {
 
-	private Connection conn;
+	private final Connection conn;
 	
 	public VendeurDaoJDBC(Connection conn) {
 		this.conn = conn;

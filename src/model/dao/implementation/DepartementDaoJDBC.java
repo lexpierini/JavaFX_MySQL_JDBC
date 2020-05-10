@@ -15,7 +15,7 @@ import model.entities.Departement;
 
 public class DepartementDaoJDBC implements DepartementDao {
 
-	private Connection conn;
+	private final Connection conn;
 	
 	public DepartementDaoJDBC(Connection conn) {
 		this.conn = conn;
