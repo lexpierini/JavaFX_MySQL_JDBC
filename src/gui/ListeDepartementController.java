@@ -43,7 +43,8 @@ public class ListeDepartementController implements Initializable {
     @FXML
     public void onBtNouveauAction(ActionEvent event) {
         Stage parentStage = Utils.currentStage(event);
-        createDialogForm("/gui/FormeDepartement.fxml", parentStage);
+        Departement obj = new Departement();
+        createDialogForm(obj, "/gui/FormeDepartement.fxml", parentStage);
     }
 
     public void setServiceDepartement(ServiceDepartement service) {
@@ -75,10 +76,14 @@ public class ListeDepartementController implements Initializable {
     }
 
     // Ouvre la fenêtre du formulaire des départements à remplir.
-    private void createDialogForm(String absoluteName, Stage parentStage) {
+    private void createDialogForm(Departement obj, String absoluteName, Stage parentStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
             Pane pane = loader.load();
+
+            FormeDepartementController controller = loader.getController();
+            controller.setDepartement(obj);
+            controller.updateFormData();
 
             Stage dialogStage = new Stage();
             dialogStage.setTitle("Entrer les données du département:");
