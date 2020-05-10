@@ -1,6 +1,7 @@
 package gui;
 
 import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.Utils;
@@ -15,11 +16,14 @@ import model.entities.Departement;
 import model.services.ServiceDepartement;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class FormeDepartementController implements Initializable {
     private Departement entity;
     private ServiceDepartement service;
+    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
     @FXML
     private TextField txtId;
     @FXML
@@ -39,6 +43,10 @@ public class FormeDepartementController implements Initializable {
         this.service = service;
     }
 
+    public void subscribeDataChangeListener(DataChangeListener listener) {
+        dataChangeListeners.add(listener);
+    }
+
     @FXML
     public void onBtEnregistrerAction(ActionEvent event) {
         if (entity == null) {
@@ -50,10 +58,17 @@ public class FormeDepartementController implements Initializable {
         try {
             entity = getFormData();
             service.saveOrUpdate(entity);
+            notifyDataChangeListeners();
             Utils.currentStage(event).close();
         }
         catch (DbException e) {
             Alerts.showAlert("Erreur lors de l'enregistrement de l'objet.", null, e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    private void notifyDataChangeListeners() {
+        for (DataChangeListener listener : dataChangeListeners) {
+            listener.onDataChanged();
         }
     }
 
