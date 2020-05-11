@@ -13,12 +13,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.entities.Departement;
+import model.exceptions.ValidationException;
 import model.services.ServiceDepartement;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class FormeDepartementController implements Initializable {
     private Departement entity;
@@ -61,6 +60,9 @@ public class FormeDepartementController implements Initializable {
             notifyDataChangeListeners();
             Utils.currentStage(event).close();
         }
+        catch (ValidationException e) {
+            setErrorMessages(e.getErrors());
+        }
         catch (DbException e) {
             Alerts.showAlert("Erreur lors de l'enregistrement de l'objet.", null, e.getMessage(), Alert.AlertType.ERROR);
         }
@@ -75,8 +77,18 @@ public class FormeDepartementController implements Initializable {
     private Departement getFormData() {
         Departement obj = new Departement();
 
+        ValidationException exception = new ValidationException("Erreur de validation.");
+
         obj.setId(Utils.tryParseToInt(txtId.getText()));
+
+        if (txtNom.getText() == null || txtNom.getText().trim().equals("")) {
+            exception.addError("nom", "Le champ ne peut pas être vide.");
+        }
         obj.setNom(txtNom.getText());
+
+        if (exception.getErrors().size() > 0) {
+            throw exception;
+        }
 
         return obj;
     }
@@ -102,5 +114,13 @@ public class FormeDepartementController implements Initializable {
         }
         txtId.setText(String.valueOf(entity.getId()));
         txtNom.setText(entity.getNom());
+    }
+
+    private void setErrorMessages(Map<String, String> errors) {
+        Set<String> fields = errors.keySet();
+
+        if (fields.contains("nom")) {
+            labelErreurNom.setText(errors.get("nom"));
+        }
     }
 }
