@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.entities.Vendeur;
+import model.services.ServiceDepartement;
 import model.services.ServiceVendeur;
 
 import java.io.IOException;
@@ -103,7 +104,8 @@ public class ListeVendeurController implements Initializable, DataChangeListener
 
             FormeVendeurController controller = loader.getController();
             controller.setVendeur(obj);
-            controller.setServiceVendeur(new ServiceVendeur());
+            controller.setServices(new ServiceVendeur(), new ServiceDepartement() );
+            controller.loadAssociateObjects();
             controller.subscribeDataChangeListener(this);
             controller.updateFormData();
 
@@ -116,6 +118,7 @@ public class ListeVendeurController implements Initializable, DataChangeListener
             dialogStage.showAndWait();
         }
         catch (IOException e) {
+            e.printStackTrace();
             Alerts.showAlert("IO Exception", "Erreur lors du chargement de la vue.", e.getMessage(), AlertType.ERROR);
         }
     }

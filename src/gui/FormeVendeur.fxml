@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="220.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FormeVendeurController">
+<AnchorPane prefHeight="240.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.FormeVendeurController">
     <children>
         <GridPane layoutX="20.0" layoutY="3.0" prefHeight="220.0" prefWidth="556.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="3.0">
             <columnConstraints>
@@ -39,8 +40,14 @@
                 <TextField fx:id="txtNom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <children>
-                        <Button fx:id="btEnregistrer" mnemonicParsing="false" onAction="#onBtEnregistrerAction" text="Enregistrer" />
-                        <Button fx:id="btAnnuler" mnemonicParsing="false" onAction="#onBtAnnulerAction" text="Annuler" />
+                        <Button fx:id="btEnregistrer" mnemonicParsing="false" onAction="#onBtEnregistrerAction" text="Enregistrer">
+                     <HBox.margin>
+                        <Insets top="2.0" />
+                     </HBox.margin></Button>
+                        <Button fx:id="btAnnuler" mnemonicParsing="false" onAction="#onBtAnnulerAction" text="Annuler">
+                     <HBox.margin>
+                        <Insets top="2.0" />
+                     </HBox.margin></Button>
                     </children>
                 </HBox>
             <Label text="Courriel" GridPane.rowIndex="2" />
@@ -65,6 +72,7 @@
                </GridPane.margin>
             </Label>
             <Label text="Département" GridPane.rowIndex="5" />
+            <ComboBox fx:id="comboBoxDepartement" prefHeight="27.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
     </children>
