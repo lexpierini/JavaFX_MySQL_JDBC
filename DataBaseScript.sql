@@ -1,3 +1,7 @@
+CREATE DATABASE database coursejdbc;
+
+USE coursejdbc;
+
 CREATE TABLE departement (
   Id int(11) NOT NULL AUTO_INCREMENT,
   Nom varchar(60) DEFAULT NULL,
