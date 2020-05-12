@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="À propos">
          <font>
@@ -16,7 +15,43 @@
             <Insets bottom="10.0" left="20.0" top="10.0" />
          </padding>
       </Label>
-      <Label text="Démo de l'application JavaFX.">
+      <Label text="Développé par: Alex Forastier Pierini">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="alex_pierini@hotmail.com">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="Application de bureau avec base de données JavaFX et MySQL avec JDBC">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin>
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label text="Cours: Programmation orientée objet avec Java">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="Prof. Dr. Nelio Alves">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="https://www.udemy.com/course/java-curso-completo">
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+      </Label>
+      <Label text="http://educandoweb.com.br">
          <padding>
             <Insets left="20.0" />
          </padding>
