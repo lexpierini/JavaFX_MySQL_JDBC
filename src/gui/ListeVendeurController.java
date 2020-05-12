@@ -19,6 +19,7 @@ import model.entities.Vendeur;
 import model.services.ServiceVendeur;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -32,6 +33,12 @@ public class ListeVendeurController implements Initializable, DataChangeListener
     private TableColumn<Vendeur, Integer> tableColumnId;
     @FXML
     private TableColumn<Vendeur, String> tableColumnNom;
+    @FXML
+    private TableColumn<Vendeur, String> tableColumnCourriel;
+    @FXML
+    private TableColumn<Vendeur, Date> tableColumnDateNaissance;
+    @FXML
+    private TableColumn<Vendeur, Double> tableColumnSalaireBase;
     @FXML
     private TableColumn<Vendeur, Vendeur> tableColumnEDIT;
     @FXML
@@ -61,6 +68,11 @@ public class ListeVendeurController implements Initializable, DataChangeListener
     private void initializeNodes() {
         tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnNom.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        tableColumnCourriel.setCellValueFactory(new PropertyValueFactory<>("courriel"));
+        tableColumnDateNaissance.setCellValueFactory(new PropertyValueFactory<>("dateNaissance"));
+        Utils.formatTableColumnDate(tableColumnDateNaissance, "yyyy-MM-dd");
+        tableColumnSalaireBase.setCellValueFactory(new PropertyValueFactory<>("salaireBase"));
+        Utils.formatTableColumnDouble(tableColumnSalaireBase, 2);
 
         // Adaptez la fenêtre du tableau à la fenêtre principale.
         Stage stage = (Stage) Main.getMainScene().getWindow();
