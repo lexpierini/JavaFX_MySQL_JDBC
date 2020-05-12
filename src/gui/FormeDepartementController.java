@@ -22,7 +22,7 @@ import java.util.*;
 public class FormeDepartementController implements Initializable {
     private Departement entity;
     private ServiceDepartement service;
-    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
+    private final List<DataChangeListener> dataChangeListeners = new ArrayList<>();
     @FXML
     private TextField txtId;
     @FXML

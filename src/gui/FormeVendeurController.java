@@ -8,27 +8,38 @@ import gui.util.Utils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import model.entities.Vendeur;
 import model.exceptions.ValidationException;
 import model.services.ServiceVendeur;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.*;
 
 public class FormeVendeurController implements Initializable {
     private Vendeur entity;
     private ServiceVendeur service;
-    private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
+    private final List<DataChangeListener> dataChangeListeners = new ArrayList<>();
     @FXML
     private TextField txtId;
     @FXML
     private TextField txtNom;
     @FXML
+    private TextField txtCourriel;
+    @FXML
+    private DatePicker dpDateNaissance;
+    @FXML
+    private TextField txtSalaireBase;
+    @FXML
     private Label labelErreurNom;
+    @FXML
+    private Label labelErreurCourriel;
+    @FXML
+    private Label labelErreurDateNaissance;
+    @FXML
+    private Label labelErreurSalaireBase;
     @FXML
     private Button btEnregistrer;
     @FXML
@@ -105,7 +116,10 @@ public class FormeVendeurController implements Initializable {
 
     private void initializeNodes() {
         Constraints.setTextFieldInteger(txtId);
-        Constraints.setTextFieldMaxLength(txtNom, 30);
+        Constraints.setTextFieldMaxLength(txtNom, 70);
+        Constraints.setTextFieldDouble(txtSalaireBase);
+        Constraints.setTextFieldMaxLength(txtCourriel, 60);
+        Utils.formatDatePicker(dpDateNaissance, "yyyy-MM-dd");
     }
 
     public void updateFormData() {
@@ -114,6 +128,12 @@ public class FormeVendeurController implements Initializable {
         }
         txtId.setText(String.valueOf(entity.getId()));
         txtNom.setText(entity.getNom());
+        txtCourriel.setText(entity.getCourriel());
+        Locale.setDefault(Locale.CANADA);
+        txtSalaireBase.setText(String.format("%.2f", entity.getSalaireBase()));
+        if (entity.getDateNaissance() != null) {
+            dpDateNaissance.setValue(LocalDate.ofInstant(entity.getDateNaissance().toInstant(), ZoneId.systemDefault()));
+        }
     }
 
     private void setErrorMessages(Map<String, String> errors) {
