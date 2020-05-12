@@ -38,6 +38,10 @@
                </GridPane.margin></Label>
                 <TextField fx:id="txtId" editable="false" GridPane.columnIndex="1" />
                 <TextField fx:id="txtNom" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtCourriel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <DatePicker fx:id="dpDateNaissance" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtSalaireBase" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <ComboBox fx:id="comboBoxDepartement" prefHeight="27.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                 <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <children>
                         <Button fx:id="btEnregistrer" mnemonicParsing="false" onAction="#onBtEnregistrerAction" text="Enregistrer">
@@ -53,9 +57,6 @@
             <Label text="Courriel" GridPane.rowIndex="2" />
             <Label text="Date de naissance" GridPane.rowIndex="3" />
             <Label text="Salaire de base" GridPane.rowIndex="4" />
-            <TextField fx:id="txtCourriel" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtSalaireBase" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="dpDateNaissance" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label fx:id="labelErreurCourriel" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="5.0" />
@@ -72,7 +73,6 @@
                </GridPane.margin>
             </Label>
             <Label text="Département" GridPane.rowIndex="5" />
-            <ComboBox fx:id="comboBoxDepartement" prefHeight="27.0" prefWidth="170.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             </children>
         </GridPane>
     </children>

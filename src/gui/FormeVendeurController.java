@@ -19,6 +19,7 @@ import model.services.ServiceDepartement;
 import model.services.ServiceVendeur;
 
 import java.net.URL;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
@@ -107,6 +108,26 @@ public class FormeVendeurController implements Initializable {
         }
         obj.setNom(txtNom.getText());
 
+        if (txtCourriel.getText() == null || txtCourriel.getText().trim().equals("")) {
+            exception.addError("courriel", "Le champ ne peut pas être vide.");
+        }
+        obj.setCourriel(txtCourriel.getText());
+
+        if (dpDateNaissance.getValue() == null) {
+            exception.addError("dateNaissance", "Le champ ne peut pas être vide.");
+        }
+        else {
+            Instant instant = Instant.from(dpDateNaissance.getValue().atStartOfDay(ZoneId.systemDefault()));
+            obj.setDateNaissance(Date.from(instant));
+        }
+
+        if (txtSalaireBase.getText() == null || txtSalaireBase.getText().trim().equals("")) {
+            exception.addError("salaireBase", "Le champ ne peut pas être vide.");
+        }
+        obj.setSalaireBase(Utils.tryParseToDouble(txtSalaireBase.getText()));
+
+        obj.setDepartement(comboBoxDepartement.getValue());
+
         if (exception.getErrors().size() > 0) {
             throw exception;
         }
@@ -165,9 +186,10 @@ public class FormeVendeurController implements Initializable {
     private void setErrorMessages(Map<String, String> errors) {
         Set<String> fields = errors.keySet();
 
-        if (fields.contains("nom")) {
-            labelErreurNom.setText(errors.get("nom"));
-        }
+        labelErreurNom.setText(fields.contains("nom") ? errors.get("nom") : "");
+        labelErreurCourriel.setText(fields.contains("courriel") ? errors.get("courriel") : "");
+        labelErreurSalaireBase.setText(fields.contains("salaireBase") ? errors.get("salaireBase") : "");
+        labelErreurDateNaissance.setText(fields.contains("dateNaissance") ? errors.get("dateNaissance") : "");
     }
 
     private void initializeComboBoxDepartment() {
